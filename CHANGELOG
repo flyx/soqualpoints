@@ -1,24 +1,6 @@
 Punktetabelle Softwarequalität - Changelog
 ==========================================
 
-v3.0 :
-	- Komplette Überarbeitung der GUI:
-	Html5 forms, css3, ein Haufen fancy Zeug
-	
-	- Reduzierte Anzahl der Datenbankabfragen
-	pro Request von O(n) auf O(2);
-	Verarbeitungszeit dramatisch verbessert.
-	
-	- Debug output (kann manuell in config.php
-	aktiviert werden)
-	
-	- Suchformular in Filterformular umgewandelt
-	(Filter bleibt bestehen, bis er geändert wird)
-	
-	- Mehr Fehlerbehandlung in der Setup-Routine
-	
-	- Erstes Release unter GPL
-	
 v2.2 :
 	- Administratoren können sich nun Ausgaben,
 	die eigentlich aus Datenschutzgründen nicht

@@ -7,7 +7,7 @@ if (getTableVisibility()) { ?>
 		<th rowspan="3" class="lastheading">Vorname</th>
 		<th rowspan="3" class="lastheading">Nachname</th>
 		<th rowspan="3" class="lastheading"><abbr title="Matrikelnummer">Mat.nr.</abbr></th>
-		<th rowspan="3" class="lastheading lastCell">Team</th>
+		<th rowspan="3" class="lastheading lastcell">Team</th>
 <?php
 	foreach($taskSets as $taskSet) {
 		echo "\t\t<th ";
@@ -47,7 +47,7 @@ if (getTableVisibility()) { ?>
 		
 		<th class="lastheading">Num.</th>
 		<th class="lastheading">User</th>
-		<th class="lastheading lastCell">Timestamp</th>
+		<th class="lastheading lastcell">Timestamp</th>
 <?php }
 ?>
 	</tr>
@@ -66,7 +66,7 @@ if (getTableVisibility()) { ?>
 		echo "\t\t<td>" . $student->getForename() . "</td>\n";
 		echo "\t\t<td>" . $student->getSurname() . "</td>\n";
 		echo "\t\t<td>" . $student->getStudNum() . "</td>\n";
-		echo "\t\t<td class=\"lastCell\">" . $student->getTeamNum() . "</td>\n";
+		echo "\t\t<td class=\"lastcell\">" . $student->getTeamNum() . "</td>\n";
 	
 		$revisions = DB::get_all_revisions($student->getID(), $taskSets);
 		$maxRevisions = 1;
@@ -101,9 +101,9 @@ if (getTableVisibility()) { ?>
 					}
 					echo "\t\t<td><span class=\"revision\">" . $points->getRevisionData()->getNumber() . "</span></td>\n";
 					echo "\t\t<td>" . $users[$points->getRevisionData()->getUserId()]['name'] . "</td>\n";
-					echo "\t\t<td class=\"lastCell\">" . $points->getRevisionData()->getTimestamp() . "</td>\n";
+					echo "\t\t<td class=\"lastcell\">" . $points->getRevisionData()->getTimestamp() . "</td>\n";
 				} else {
-					echo "\t\t<td class=\"lastCell\" colspan=\"" .
+					echo "\t\t<td class=\"lastcell\" colspan=\"" .
 							($taskSet->getNumDiscTasks() + $taskSet->getNumProgTasks() + 3) .
 							"\"></td>\n";
 				}
@@ -115,7 +115,7 @@ if (getTableVisibility()) { ?>
 				} else {
 					echo "\t<tr>\n";
 				}
-				echo "\t\t<td class=\"lastCell\" colspan=\"4\"></td>";
+				echo "\t\t<td class=\"lastcell\" colspan=\"4\"></td>";
 			}
 		}
 	}?>

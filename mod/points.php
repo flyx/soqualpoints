@@ -128,7 +128,7 @@ if (getTableVisibility()) {
 					$progPoints = $points->getProgPoints($i);
 					if ($progPoints == -1) $progPoints = "";
 					echo "\t\t\t<td><input type=\"number\" min=\"0\" step=\"0.5\" name=\"prog$i\"";
-					echo "value=\"$progPoints\" size=\"2\" /></td>\n";
+					echo "value=\"$progPoints\" size=\"4\" /></td>\n";
 				}
 				echo "\t\t\t<td class=\"lastcell\"><input type=\"submit\" value=\"set\" />";
 				echo "<a class=\"tableButton\" href=\"?page=revisions&amp;id=" . $student->getID();

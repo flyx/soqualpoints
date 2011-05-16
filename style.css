@@ -320,7 +320,9 @@ table#contenttable tbody tr:hover {
 table#contenttable tbody tr.lightBg:hover {
 	background: #ccc;
 }
-
+table#contenttable tbody td {
+	white-space: nowrap;
+}
 
 span.revision {
 	font-size: x-small;

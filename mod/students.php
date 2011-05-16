@@ -26,7 +26,7 @@ if (getTableVisibility()) {
 			$recentTeam = $student->getTeamNum();
 			$lightBg = !$lightBg;
 		}
-		echo $lightBg ? "\t<tr class=\"lightBg\">\n" : "\t<tr>\n";
+		echo $lightBg ? "\t<tr class=\"lightbg\">\n" : "\t<tr>\n";
 		if (($editEverything or $selEditId == $student->getID()) and $user['rights'] > 1) {
 			echo "\t\t<form action=\"?page=students&amp;action=updatestudent\" method=\"post\">\n";
 			echo "\t\t\t<input type=\"hidden\" name=\"id\" value=\"" . $student->getID() . "\" />\n";

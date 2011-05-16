@@ -3,6 +3,7 @@
 	$taskSets = DB::get_tasks(NULL, NULL, NULL, NULL, NULL);
 ?>
 <table id="contenttable" class="tasksettable">
+	<thead>
 	<tr>
 		<th>Name</th>
 		<th>Anzahl Aufgaben Diskussionsteil</th>
@@ -14,12 +15,14 @@
 	}
 ?>		
 	</tr>
+	</thead>
+	<tbody>
 <?php
 	$lightBg = False;
 	foreach ($taskSets as $taskSet) {
 		$lightBg = !$lightBg;
 		if ($lightBg) {
-			echo "\t<tr class=\"lightBg\">\n";
+			echo "\t<tr class=\"lightbg\">\n";
 		} else {
 			echo "\t<tr>\n";
 		}
@@ -30,11 +33,11 @@
 			echo "\t\t\t<td><input name=\"name\" type=\"text\" value=\"" .
 				 $taskSet->getName() . "\" size=\"16\" /></td>\n";
 			echo "\t\t\t<td><input name=\"count_disc_tasks\" type=\"number\" min=\"0\" step=\"1\" value=\"" .
-				 $taskSet->getNumDiscTasks() . "\" size=\"4\" /></td>\n";
+				 $taskSet->getNumDiscTasks() . "\" size=\"5\" /></td>\n";
 			echo "\t\t\t<td><input name=\"count_prog_tasks\" type=\"number\" min=\"0\" step=\"1\" value=\"" .
-				 $taskSet->getNumProgTasks() . "\" size=\"4\" /></td>\n";
+				 $taskSet->getNumProgTasks() . "\" size=\"5\" /></td>\n";
 			echo "\t\t\t<td><input name=\"max_prog_points\" type=\"number\" min=\"0\" step=\"1\" value=\"" .
-				 $taskSet->getMaxProgPoints() . "\" size=\"4\" /></td>\n";
+				 $taskSet->getMaxProgPoints() . "\" size=\"5\" /></td>\n";
 			echo "\t\t\t<td><input type=\"submit\" value=\"Speichern\" /></td>\n";
 			echo "\t\t</form>\n";
 			echo "\t\t<form action=\"?page=tasksets&amp;action=delset\"" .
@@ -74,17 +77,18 @@
 				<input name="name" type="text" size="16" />
 			</td>
 			<td class="formfield">
-				<input name="count_disc_tasks" type="number" min="0" step="1" size="4" />
+				<input name="count_disc_tasks" type="number" min="0" step="1" size="5" />
 			</td>
 			
 			<td  class="formfield">
-				<input name="count_prog_tasks" type="number" min="0" step="1" size="4" />
+				<input name="count_prog_tasks" type="number" min="0" step="1" size="5" />
 			</td>
 			<td class="formfield">
-				<input name="max_prog_points" type="number" min="0" step="1" size="4" />
+				<input name="max_prog_points" type="number" min="0" step="1" size="5" />
 			</td>
 	
 		</tr>
+		</tbody>
 	</table>
 	</form>
 <?php } ?>
