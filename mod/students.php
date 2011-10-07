@@ -93,7 +93,7 @@ if (getTableVisibility()) {
 			<td class="formlabel">Nachname:</td>
 			<td class="formlabel">Matrikelnummer:</td>
 			<td class="formlabel">Team:</td>
-			<td class="formsubmit" rowspan="2"><input type="submit" value="Hinzufügen" /></td>
+			<td></td>
 
 		</tr>
 		<tr>
@@ -110,7 +110,7 @@ if (getTableVisibility()) {
 			<td class="formfield">
 				<input name="team_number" type="number" min="0" step="1" size="20" />
 			</td>
-	
+			<td class="formsubmit"><input type="submit" value="Hinzufügen" /></td>
 		</tr>
 		</tbody>
 	</table>

@@ -32,6 +32,9 @@
 			echo "\t\t</tr>\n";
 			$varying_bg = !$varying_bg;
 		}
-?>	
+?>
+		<tr style="height: 100%; background: <?php echo $varying_bg ? "#7e3" : "#9e5"; ?>">
+			<td></td><td></td>
+		</tr>
 	</table></div>
 <?php } ?>

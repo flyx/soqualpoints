@@ -69,7 +69,7 @@
 			<td class="formlabel">Aufgaben Diskussionsteil:</td>
 			<td class="formlabel">Aufgaben Programmierteil:</td>
 			<td class="formlabel">Punkte Programmierteil:</td>
-			<td class="formsubmit" rowspan="2"><input type="submit" value="Hinzufügen" /></td>
+			<td></td>
 
 		</tr>
 		<tr>
@@ -86,7 +86,7 @@
 			<td class="formfield">
 				<input name="max_prog_points" type="number" min="0" step="1" size="5" />
 			</td>
-	
+			<td class="formsubmit"><input type="submit" value="Hinzufügen" /></td>
 		</tr>
 		</tbody>
 	</table>
