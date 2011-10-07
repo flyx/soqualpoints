@@ -105,7 +105,7 @@ if (getTableVisibility()) {
 			</td>
 			
 			<td  class="formfield">
-				<input name="student_number" type="number" min="0" step="1" size="20" />
+				<input name="student_number" type="text" min="0" step="1" size="20" />
 			</td>
 			<td class="formfield">
 				<input name="team_number" type="number" min="0" step="1" size="20" />

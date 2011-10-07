@@ -13,7 +13,7 @@
 	<h2 style="text-align: center;">Einrichtung der Punktetabelle</h2>
 	<?php
 		if (!extension_loaded("mysql")) {
-			echo "<p style=\"text-align: center;\">Diese Software benötigt die MySQL-Extension für PHP, die auf diesem System nicht verfügbar ist.</p>";
+			echo "<p style=\"text-align: center;\">Diese Software benötigt die MySQL-Extension für PHP, welche auf diesem System nicht verfügbar ist.</p>";
 			die("</body></html>");
 		}
 		if (file_exists('config.php')) {

@@ -6,7 +6,7 @@
 		$query = 'SELECT id, rights';
 		if (DB::isEncrypted()) {
 			$query .= ', AES_DECRYPT(mpw, "' .
-					mysql_real_escape_string($_COOKIE['soqual09_password']). '") AS plain_mpw';
+					mysql_real_escape_string($_SESSION['password']). '") AS plain_mpw';
 		}
 		$query .= ' FROM `users` WHERE name="' .
 				 mysql_real_escape_string($username) . '" AND password="' .
@@ -31,19 +31,18 @@
 	}
 	
 	function getUser() {
-		$user['name'] = $_COOKIE['soqual09_username'];
-		$user['password'] = $_COOKIE['soqual09_password'];
+		$user['name'] = $_SESSION['username'];
+		$user['password'] = $_SESSION['password'];
+		debugLog("user", "retrieving session data: username=" .
+				htmlspecialchars($user['name'], ENT_QUOTES, "UTF-8") . 
+				", password=" . $user['password']);
+		
 		$row = userLoginRow($user['name'], hash("sha256", $user['password'], False));
 		$user['id'] = $row['id'];
 		$user['displayname'] = htmlspecialchars($user['name'], ENT_QUOTES, "UTF-8");
 		if ($user['id'] >= 0) {
 			$user['rights'] = $row['rights'];
 			if (DB::isEncrypted()) {
-				/*$query = "SELECT AES_DECRYPT(\"" . mysql_real_escape_string($row['mpw']) . "\", \"" .
-							mysql_real_escape_string($_COOKIE['soqual09_password']) . "\") AS mpw";
-				$result = DB::query($query);
-				$row = mysql_fetch_assoc($result);
-				DB::setMasterPassword($row['mpw']);*/
 				DB::setMasterPassword($row['plain_mpw']);
 			}
 		} else {
@@ -58,19 +57,16 @@
 	}
 	
 	function loginUser($username, $password) {
+		debugLog("user", "logging in...");
+	
 		$pwHash = hashPW($username, $password);
-		
-		setcookie('soqual09_username', $username, time() + 424242);
-		setcookie('soqual09_password', $pwHash, time() + 424242);
-		$_COOKIE['soqual09_username'] = $username;
-		$_COOKIE['soqual09_password'] = $pwHash;
+		$_SESSION['username'] = $username;
+		$_SESSION['password'] = $pwHash;
 	}
 	
 	function logoutUser() {
-		setcookie('soqual09_username');
-		setcookie('soqual09_password');
-		unset($_COOKIE['soqual09_username']);
-		unset($_COOKIE['soqual09_password']);
+		unset($_SESSION['username']);
+		unset($_SESSION['password']);
 	}	
 	
 	function createUser($username, $password, $adminId, $rights) {
@@ -85,7 +81,7 @@
 				$result = DB::query($query);
 				if ($row = mysql_fetch_assoc($result)) {
 					$query = "SELECT AES_DECRYPT(\"" . mysql_real_escape_string($row['mpw']) . "\", \"" .
-							mysql_real_escape_string($_COOKIE['soqual09_password']) . "\") AS mpw";
+							mysql_real_escape_string($_SESSION['password']) . "\") AS mpw";
 					$result = DB::query($query);
 					$row = mysql_fetch_assoc($result);
 					$mpw = mysql_real_escape_string($row['mpw']);
@@ -120,7 +116,7 @@
 				$result = DB::query($query);
 				if ($row = mysql_fetch_assoc($result)) {
 					$query = "SELECT AES_DECRYPT(\"" . mysql_real_escape_string($row['mpw']) . "\", \"" .
-							mysql_real_escape_string($_COOKIE['soqual09_password']) . "\") AS mpw";
+							mysql_real_escape_string($_SESSION['password']) . "\") AS mpw";
 					$result = DB::query($query);
 					$row = mysql_fetch_assoc($result);
 					$mpw = mysql_real_escape_string($row['mpw']);
@@ -193,7 +189,7 @@
 				$result = DB::query($query);
 				if ($row = mysql_fetch_assoc($result)) {
 					$query = "SELECT AES_DECRYPT(\"" . mysql_real_escape_string($row['mpw']) . "\", \"" .
-							mysql_real_escape_string($_COOKIE['soqual09_password']) . "\") AS mpw";
+							mysql_real_escape_string($_SESSION['password']) . "\") AS mpw";
 					$result = DB::query($query);
 					$row = mysql_fetch_assoc($result);
 					$mpw = mysql_real_escape_string($row['mpw']);

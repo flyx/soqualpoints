@@ -1,12 +1,12 @@
-Punktetabelle Softwarequalität, v2.1
+Punktetabelle Softwarequalität, v3.0
 ====================================
 
 Systemanforderungen
 -------------------
 
-* PHP 5.x
-* MySQL 5.1.x
-* Ein Webserver (gestestet mit Apache 2.2.x)
+ * PHP 5.x
+ * MySQL 5.1.x
+ * Ein Webserver (gestestet mit Apache 2.2.x)
 
 Installation
 ------------
@@ -21,36 +21,49 @@ Alle Dateien von PS (außer dem README) müssen
 unter Beibehaltung der Ordnerstruktur in einen
 über HTTP(S) erreichbaren Pfad auf dem Server
 gelegt werden. Die Installationsroutine wird eine
-Datei config.php erstellen, dafür muss der
+Datei `config.php` erstellen, dafür muss der
 Webserver Schreibrechte auf den Installationsordner
 von PS haben.
-Falls eine existierende config.php überschrieben
-werden soll, müssen für diese auch entsprechende
-Rechte gesetzt sein.
+Falls eine Datei `config.php` bereits existiert,
+muss diese vor Beginn der Installation gelöscht
+werden.
 
 Wenn diese Voraussetzungen erfüllt sind, kann
 das Installations-Webinterface über
-$DOMAINPFAD/setup.php gestartet werden.
+`$URL/setup.php` gestartet werden.
 
 Hier kann der Titel der Installation, die Daten
 des MySQL-Servers und Name und Passwort des
-Root-Users angegeben werden. DIESE DATEN WERDEN
-IN KEINSTER WEISE AUF SINNIGKEIT ÜBERPRÜFT. Nur
+Root-Users angegeben werden. **Diese Daten werden
+in keinster Weise auf Sinnigkeit überprüft**. Nur
 die Datenbank-Schnittstelle wird einen Fehler
 werfen, wenn die eingegebenen Daten inkorrekt sind.
 
 Es besteht die Option, die Datenbank zu
-verschlüsseln. DIESE EINSTELLUNG KANN UND DARF
-NACHTRÄGLICH NICHT MEHR VERÄNDERT WERDEN. Bei
+verschlüsseln. **Diese Einstellung kann und darf
+nachträglich nicht mehr verändert werden**. Bei
 der Verschlüsselung ist zu beachten, dass die
 Daten nicht wiederhergestellt werden können, falls
 alle Benutzer ihr Passwort vergessen. Das ist ja
 schließlich der Sinn der Verschlüsselung, nicht wahr?
 
 Nachdem das Setup-Skript gelaufen ist, sollte die
-Datei setup.php UNBEDINGT vom Server gelöscht werden.
-Mit ihr lässt sich OHNE EIN LOGIN DIE GESAMTE
-DATENBANK LÖSCHEN.
+Datei setup.php vom Server gelöscht werden.
+Sie lässt sich zwar nicht benutzen, solange die
+Datei `config.php` existiert, ist aber dennoch ein
+Sicherheitsrisiko.
+
+_Hinweis für Entwickler: `config.php` enthält eine
+Zeile_
+
+	$enable_debug = False;
+	
+_Um Debugausgabe zu aktivieren, muss `$enable_debug`
+auf `True` gesetzt werden. **Die Debugausgabe sollte
+niemals auf einem Produktivsystem verwendet werden.
+Sie schreibt Datenbank-Queries auf die Seite, die
+eventuell den Datenbankschlüssel oder Hashwerde von
+Passwörtern enthalten können.**_
 
 Administration
 --------------
@@ -63,23 +76,27 @@ In der Benutzerkontenverwaltung können neue Benutzer
 hinzugefügt, existierende Benutzer gelöscht und
 Rechte geändert werden. Es gibt 4 Rechtestufen:
 
-0 - beantragt:
+ *	0 - beantragt:
+ 
 	Ein neuer User hat sich über das Registrieren-
 	Formular der Seite angemeldet. Dieser muss von
 	einem Administrator freigeschaltet werden,
 	bevor er Zugriff auf die Seite hat. Diese
 	Stufe kann nicht nachträglich vergeben werden.
 
-1 - read:
+ *	1 - read:
+ 
 	Ein Benutzer mit Leserechten. Er hat keinerlei
 	Rechte, irgendetwas zu verändern.
 
-2 - read & write:
+ *	2 - read & write:
+ 
 	Ein Benutzer mit Lese- und Schreibrechten. Er
 	kann Punkte, Studenten und Aufgabenblätter
 	erstellen, bearbeiten und löschen.
 
-3 - admin:
+ *	3 - admin:
+ 
 	Ein Administrator. Der Root-User ist immer
 	Administrator, das kann nicht geändert werden.
 	Nur Administratoren haben Zugriff auf das Admin-
@@ -102,10 +119,10 @@ CSV exportiert wurde.
 Für den Import wird folgendes Format für jede
 Zeile verwendet:
 
-Teamnummber, Nachname, Vorname, Matrikelnummer (, Punkte)*
+	Teamnummer, Nachname, Vorname, Matrikelnummer (, Punkte)*
 
 Die Daten der Aufgabenblätter werden weder ex- noch
-importiert. Sie müssen vor dem Import erstellt werden.
+importiert. Sie müssen vor dem Import im System erstellt werden.
 
 Der Import löscht keine bestehenden Daten, sondern
 überschreibt sie nur gegebenenfalls. Falls die
@@ -117,14 +134,18 @@ Dokumentation
 
 Die Dokumentation des Benutzerinterfaces findet
 sich nach der Installation von PS unter
-$DOMAINPFAD/?page=help.
+`$URL/?page=help`.
 
 Kontakt
 -------
 
-Bei Fragen und Problemen einfach eine E-Mail an
-Felix Krause [flyx@isobeef.org]
+Fehlermeldungen und Featurerequests können auf der
+[GitHub-Seite des Projekts](https://github.com/flyx86/soqualpoints)
+als Issues gespostet werden. Dort können auch
+Nachrichten an mich persönlich geschickt werden.
 
-Eine Wartung von PS ist nicht vereinbart. Sollte
-ein Wunsch danach aufkommen, naja, ich kann ja
-mal sehen, was sich machen lässt ;).
+Lizenz
+------
+
+Soqualpoints ist freie Software und steht unter
+der GNU GPL v3 (siehe Datei `COPYING`).

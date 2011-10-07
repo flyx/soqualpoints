@@ -111,9 +111,6 @@
 			<td class="formlabel">Matrikelnummer:</td>
 			<td class="formlabel">Team:</td>
 			<td class="formlabel">Aufgabenblatt:</td>
-			<td class="formsubmit" rowspan="2"><input type="submit" name="filter" value="Filtern" /></td>
-			<td class="formsubmit" rowspan="2"><input type="submit" name="resetfilter" value="Zurücksetzen" /></td>
-
 		</tr>
 		<tr>
 			<td  class="formfield">
@@ -136,6 +133,8 @@
 			<td class="formfield">
 				<select name="showset"> <?php echo $setShowOptions; ?></select>
 			</td>
+			<td class="formsubmit"><input type="submit" name="filter" value="Filtern" /></td>
+			<td class="formsubmit"><input type="submit" name="resetfilter" value="Zurücksetzen" /></td>
 <?php } ?>
 		</tr>
 	</table></div>
@@ -166,6 +165,9 @@
 				$allowForce = $user['rights'] >= 3;
 				$forceLabel = "Trotzdem anzeigen";
 			}
+		} else if (count($students) == 0) {
+			$contentInfoLabel = "Die Suchkriterien treffen auf keine Studenten zu (oder es sind keine Studenten in die Datenbank eingetragen.)";
+			$allowForce = FALSE;
 		} else {
 			$showTable = TRUE;
 		}

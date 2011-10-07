@@ -1,4 +1,7 @@
 <?php
+	// session is used for the filter parameters and login
+	session_start();
+
 	require_once('debuglog.php');
 	
 	// check if this site has been configured yet
@@ -6,9 +9,6 @@
 		require_once('config.php');
 		require_once('backend.php');
 		require_once('user.php');
-	
-	// session is used for the filter parameters
-	session_start();
 	
 	// checks if a var is set, returns its value if yes, returns NULL otherwise
 	// used for GET parameters
@@ -76,7 +76,7 @@
 	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body<?php if ($enable_debug) echo ' style="margin-bottom: 250px"'?>>
+<body<?php if ($enable_debug) echo ' style="margin-bottom: 1.6em"'?>>
 	<div id="control">
 		<h1 id="heading"><?php echo $pagetitle; ?></h1>
 

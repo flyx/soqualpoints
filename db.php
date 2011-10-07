@@ -369,12 +369,12 @@
 			foreach ($students as $student) {
 				$studIds[] = $student->getID();
 			}
-			$query .= " WHERE student_id IN (" . implode(",", $studIds) . ")";
+			$query .= " WHERE student_id IN (" . implode(", ", $studIds) . ")";
 			$taskSetIds = array();
 			foreach($taskSets as $taskSet) {
 				$taskSetIds[] = $taskSet->getID();
 			}
-			$query .= " AND task_set_id IN (" . implode(",", $taskSetIds) . ")";
+			$query .= " AND task_set_id IN (" . implode(", ", $taskSetIds) . ")";
 			$query .= " GROUP BY student_id, task_set_id";
 			
 			$query .= ") AS p2 ON p1.revision = p2.revision AND p1.student_id = p2.student_id AND p1.task_set_id = p2.task_set_id";
@@ -416,11 +416,13 @@
 				}
 				$curPointSet[] = $row;
 			}
-			$revision = $currentRevisions[$curStudent->getID()][$curTaskSet->getID()];
-			$curStudent->loadPoints($curTaskSet, $curPointSet, $revision['number'], $revision);
-			unset($currentRevisions[$curStudent->getID()][$curTaskSet->getID()]);
-			if (count($currentRevisions[$curStudent->getID()]) == 0) {
-				unset($currentRevisions[$curStudent->getID()]);
+			if ($curTaskSet !== NULL) {
+				$revision = $currentRevisions[$curStudent->getID()][$curTaskSet->getID()];
+				$curStudent->loadPoints($curTaskSet, $curPointSet, $revision['number'], $revision);
+				unset($currentRevisions[$curStudent->getID()][$curTaskSet->getID()]);
+				if (count($currentRevisions[$curStudent->getID()]) == 0) {
+					unset($currentRevisions[$curStudent->getID()]);
+				}
 			}
 			
 			// initialize all points we didn't get any rows for
@@ -480,7 +482,7 @@
 			foreach($taskSets as $taskSet) {
 				$taskSetIds[] = $taskSet->getID();
 			}
-			$query .= " AND task_set_id IN (" . implode(",", $taskSetIds) . ")";
+			$query .= " AND task_set_id IN (" . implode(", ", $taskSetIds) . ")";
 			$query .= " ORDER BY task_set_id, number ASC;";
 			$result = DB::query($query);
 			$revArray = array();
@@ -490,7 +492,7 @@
 			while ($row = mysql_fetch_assoc($result)) {
 				$revArray[$row['task_set_id']][$row['number']] = $row;
 			}
-			$query = "SELECT * FROM `points` WHERE student_id=$studentId AND task_set_id IN(" . implode(",", $taskSetIds) . ")";
+			$query = "SELECT * FROM `points` WHERE student_id=$studentId AND task_set_id IN(" . implode(", ", $taskSetIds) . ")";
 			$query .= " ORDER BY task_set_id, revision ASC;";
 			$result = DB::query($query);
 			$retArray = array();
@@ -538,12 +540,12 @@
 			foreach ($students as $student) {
 				$studIds[] = $student->getID();
 			}
-			$query .= " WHERE student_id IN (" . implode(",", $studIds) . ")";
+			$query .= " WHERE student_id IN (" . implode(", ", $studIds) . ")";
 			$taskSetIds = array();
 			foreach($taskSets as $taskSet) {
 				$taskSetIds[] = $taskSet->getID();
 			}
-			$query .= " AND task_set_id IN (" . implode(",", $taskSetIds) . ")";
+			$query .= " AND task_set_id IN (" . implode(", ", $taskSetIds) . ")";
 			$query .= " GROUP BY student_id, task_set_id) AS r2";
 			$query .= " ON r1.number = r2.number AND r1.student_id = r2.student_id AND r1.task_set_id = r2.task_set_id";
 			$query .= " ORDER BY r1.student_id, r1.task_set_id;";

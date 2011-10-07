@@ -170,23 +170,23 @@ div#control {
 	background: #eee;
 	background: -webkit-linear-gradient(
 		top,
-		#fff,
-		#d5d5d5
+		#d5d5d5,
+		#fff
 	);
 	background: -moz-linear-gradient(
 		top,
-		#fff,
-		#d5d5d5
+		#d5d5d5,
+		#fff
 	);
 	background: -o-linear-gradient(
 		top,
-		#fff,
-		#d5d5d5
+		#d5d5d5,
+		#fff
 	);
 	background: linear-gradient(
 		top,
-		#fff,
-		#d5d5d5
+		#d5d5d5,
+		#fff
 	);
 }
 
@@ -458,4 +458,75 @@ div#help {
 }
 div.confirmForm {
 	height: 5em;
+}
+
+div#debug {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right:0;
+	height: 1.6em;
+	overflow: hidden;
+	z-index: 3;
+	-moz-transition: height 0.5s;
+	-webkit-transition: height 0.5s;
+	-o-transition: height 0.5s;
+	font-family: Menlo, 'Courier New', Courier, monospace;
+	font-size: smaller;
+}
+
+div#debug table {
+	display: block;
+	border: 0px;
+	border-collapse: collapse;
+	margin:0px;
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+}
+
+div#dbheader {
+	background: #bbb;
+	border: 0px;
+	width: 100%;
+	text-align: center;
+	line-height: 1.6em;
+	padding: 0;
+	margin: 0;
+	white-space: nowrap;
+}
+
+div#dbheader p {
+	margin: 0;
+	padding: 0;
+}
+
+div#dbheader p:before {
+	content: "⬆  ";
+}
+
+div#dbheader p:after {
+	content: "  ⬆";
+}
+
+div#debug table td {
+	border: 0px;
+}
+
+div#debug table tbody td:first-child {
+	font-weight: bold;
+	padding-right: 5px;
+	white-space: nowrap;
+}
+
+div#debug:hover {
+	height: 500px;
+}
+
+div#debug:hover #dbheader p:before {
+	content: "⬇  ";
+}
+
+div#debug:hover #dbheader p:after {
+	content: "  ⬇";
 }
