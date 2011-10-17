@@ -271,6 +271,12 @@ a.tab {
 		#859085
 	);
 }
+
+input[type="number"] {
+	min-width: 4em;
+	max-width: 6em;
+}
+
 div#filter {
 	width: 100%;
 	background: #ccc;
