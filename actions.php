@@ -115,7 +115,7 @@
 					$name = htmlspecialchars($_POST['name'], ENT_QUOTES, "UTF-8");
 					$id = (int)$_POST['id'];
 					$taskArray = DB::get_tasks($id, NULL, NULL, NULL, NULL);
-					$taskSet = $taskArray[0];
+					$taskSet = $taskArray[$id];
 					if ($taskSet != NULL) {
 						if ($cpt + $cdt > 0 and $cpt + $cdt <= 50) {
 							$taskSet->updateData($mpp, $cpt, $cdt, $name);
