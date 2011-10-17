@@ -1,6 +1,15 @@
 Punktetabelle Softwarequalität - Changelog
 ==========================================
 
+v3.0 :
+	- Interface überarbeitet
+	
+	- Erstes Open-Source-Release
+	
+	- Debugausgabe
+	
+	- Kleinere Bugfixes
+
 v2.2 :
 	- Administratoren können sich nun Ausgaben,
 	die eigentlich aus Datenschutzgründen nicht
