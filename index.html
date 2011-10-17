@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html style="font-family: Helvetica, Arial, sans-serif;">
+	<head>
+		<title>Soqualpoints - Punktemanagement für universitäre Übungsveranstaltungen</title>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	</head>
+	<body style="padding: 0; margin: 0; background: #aaa;"><div style="width: 1024px; margin-left: auto; margin-right: auto; margin-top: 0; margin-bottom: 0; padding: 2em; padding-top: 0.7em; background: #f0f8ff">
+		<h1 style="text-align: center;">Soqualpoints<br />Punktemanagement für universitäre Übungsveranstaltungen</h1>
+		
+		<h2>Übersicht</h2>
+		<p><strong>Soqualpoints</strong> ist eine Webanwendung, die für die Verwaltung von Studentenleistungen
+		geschrieben wurde. Die Studentenleistungen werden als Punkte in einer Tabelle getrennt nach Aufgabenblättern
+		erfasst. Dabei können mehrere Benutzer gleichzeitig die einzelnen Datensätze, die in einer Datenbank
+		gespeichert werden, bearbeiten.</p>
+		
+		<h2>Entstehung</h2>
+		<p>Soqualpoints entstand im Rahmen der Übungsveranstaltung <em>Softwarequalität</em> für den Studiengang
+		Softwaretechnik an der Universität Stuttgart (daher der Name). Die ursprüngliche Zielsetzung war, eine
+		einzige zentrale Tabelle verwalten zu können, die den Punktestand aller Studenten enthält, ohne dass
+		mehrere Korrektoren sich treffen müssen, um an einem einzelnen Spreadsheet zu arbeiten.</p>
+		
+		<p>Eine mögliche Lösung für das Problem wäre die Nutzung bestehender Angebote wie <em>Google Docs</em>
+		gewesen, was jedoch aus Datenschutzgründen problematisch ist. Letztendlich habe ich als Tutor selbst
+		Hand angelegt und ein spartanisches Webinterface für eine Datenbank zusammengehackt, um das ständige
+		Herumschicken von Spreadsheets zu umgehen.</p>
+		
+		<p>Im darauf folgenden Jahr nahm ich wieder dieselbe Tutorenstelle an und entwickelte die Applikation
+		weiter - primär mit dem Ziel, die Usability zu steigern. Inzwischen ist Soqualpoints gut benutzbar und
+		als Open-Source-Projekt auf GitHub verfügbar.</p>
+		
+		<h2>Anwendungsvoraussetzungen und -Möglichkeiten</h2>
+		<p>Soqualpoints geht davon aus, dass die Übungsveranstaltung aus mehreren Arbeitsblättern besteht, die
+		von den Studenten bearbeitet werden müssen. Jedes Arbeitsblatt kann zwei Arten von Aufgaben enthalten:</p>
+		
+		<ul>
+			<li><em>Votieraufgaben</em>. Das sind Aufgaben, die entweder einen oder null Punkte geben.</li>
+			<li><em>Aufgaben mit freier Punktzahl</em>. Für diese Aufgaben kann eine beliebige Maximalpunktzahl
+			festgelegt werden. Punkte können frei vergeben werden - auch über die Maximalpunktzahl hinaus.</li>
+		</ul>
+		
+		<p>Studenten haben einen Vor- und Nachnamen sowie eine Matrikelnummer. Außerdem können sie einem Team
+		angehören. Soqualpoints kann diese datenschutzrechtlich relevanten Informationen in der Datenbank
+		verschlüsselt ablegen. Punkte werden immer pro Student gespeichert; Soqualpoint ermöglicht es jedoch,
+		Punkte für alle Mitglieder eines Teams auf einmal zu setzen (ausgenommen Votierpunkte).</p>
+		
+		<p>Soqualpoints implementiert eine rudimentäre Benutzerverwaltung. Ohne Account kann die Datenbank nicht
+		eingesehen oder verändert werden. Nutzer können Leserechte, Schreibrechte oder Administratorrechte haben.
+		Die Software ist nicht dafür konzipiert, dass Studenten selbst ihre Daten abrufen können.</p>
+		
+		<h2>Systemvoraussetzungen</h2>
+		
+		<p>Um Soqualpoints auf einem Webserver zu betreiben, wird mindestens benötigt:</p>
+		<ul>
+			<li>PHP 5.x</li>
+			<li>MySQL 5.1.x</li>
+		</ul>
+		
+		<h2>Alleinstellungsmerkmale</h2>
+		
+		<h3>Aufgabenblätter</h3>
+		<p>Jedes Arbeitsblatt kann individuell konfiguriert werden. Es ist kein Problem, Aufgabenblätter mit
+		unterschiedlicher Aufgabenanzahl zu verwalten.</p>
+		
+		<h3>Studenten</h3>
+		<p>Ein Studentendatum umfasst Vorname, Nachname, Matrikelnummer und Teamnummer. Studenten können im
+		Verlauf der Veranstaltung das Team wechseln, ohne die Punkte des alten Teams zu verlieren. Die sensiblen
+		Studentendaten können AES-verschlüsselt in die Datenbank abgelegt werden. Diese Verschlüsselung ist
+		natürlich nur so sicher wie die Passwörter der Systemnutzer.</p>
+		
+		<h3>Punkteliste</h3>
+		<p>Die Punkteliste kann nach Studenten, Teams und Aufgabenblättern gefiltert werden. Üblicherweise arbeitet
+		man auf einer gefilterten Liste. Sind mehr als 20 Studenten in der Datenbank abgelegt, wird die Liste aus
+		Datenschutzgründen gar nicht angezeigt (kann von einem Nutzer mit Administratorrechten umgangen werden);
+		statt dessen bekommt der Nutzer einen Hinweis, den Filter anzupassen.</p>
+		
+		<p>Pro Student und Aufgabenblatt existiert ein Datensatz. Dieser besitzt eine History, das heißt man kann
+		vergangene Werte betrachten und herausfinden, welche Nutzer welche Änderungen vorgenommen haben. Jede
+		Änderung an einem Datensatz wird in dieser Versionsgeschichte inklusive dem Nutzer und einem Timestamp
+		gespeichert. In der Punkteliste selbst wird nur die Nummer der aktuellen Revision angezeigt; wechselt man
+		in die Revisionsansicht, kann man alle vergangenen Revisionen eines Datensatzes betrachten. Die
+		Revisionsliste ist vom Webinterface aus nicht editierbar.</p>
+		
+		<h3>Administration</h3>
+		<p>Die Benutzerverwaltung läuft über das Administrationsinterface. Hier können neue Benutzer angelegt,
+		freigeschaltet und gelöscht werden. Ferner können die Zugriffsrechte und das Passwort aller Benutzer
+		geändert werden. Natürlich haben die Administratoren keine Möglichkeit, die Passwörter einzelner Nutzer
+		auszulesen. Die Möglichkeit der Passwortänderung besteht nur, falls ein Nutzer sein Passwort vergisst.</p>
+		
+		<p>Administratoren können die aktuelle Punkteliste als CSV-Datei exportieren, um sie in ein Spreadsheet
+		oder ähnliches zu überführen. Außerdem besteht die Möglichkeit, eine solche CSV-Datei zu importieren.
+		Dies kann zum Beispiel für Backups der Datenbank genutzt werden.</p>
+		
+		<h3>Webtechnologie</h3>
+		<p>Soqualpoints verwendet Features der kommenden Standards <em>HTML5</em> und <em>CSS3</em>. Das Interface
+		wurde auf modernen Browsern (Chrome, Firefox, Opera, Safari) getestet. Die Funktionalität des Interfaces
+		sollte von älteren Browsern nicht oder nur wenig beeinträchtigt werden. Getestet wurde sie aber damit nicht.</p>
+		
+		<h2>Lizenz und Autor</h2>
+		<p>Soqualpoints wird bereitgestellt unter den Bedingungen der GNU GPL v3. Die Software wurde von
+		<a href="http://flyx.org/">Felix Krause</a> entwickelt, der Quellcode ist auf
+		<a href="https://github.com/flyx86/soqualpoints">GitHub</a> verfügbar.</p>
+		
+		
+	</div></body>
+
+</html>
