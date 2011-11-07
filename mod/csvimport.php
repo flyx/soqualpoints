@@ -145,6 +145,9 @@ if ($user['rights'] < 3) {
 							break;
 					}
 				}
+				if ($state < 0) {
+					redlogln("'not enough data in this line, nothing was imported.'");
+				}
 				if (!$error) {
 					logln("line finished without errors.");
 				}
